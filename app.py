@@ -10,7 +10,7 @@ st.write("Take a photo or upload one below:")
 # Load model
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("trashclassify.h5")
+    model = tf.keras.models.load_model("trashclassify.keras")
     return model
 
 model = load_model()
