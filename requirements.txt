@@ -1,5 +1,6 @@
-pip
+os
 streamlit
 tensorflow==2.14
 pillow
 numpy
+Keras

@@ -4,16 +4,23 @@ from PIL import Image
 import numpy as np
 
 
+# Available backend options are: "jax", "torch", "tensorflow".
+import os
+os.environ["KERAS_BACKEND"] = "jax"
+	
+import keras
+model = keras.saving.load_model("hf://dvk65/Trash-Classification-Model")
+
 st.title("Trash Classifier")
 st.write("Take a photo or upload one below:")
 
-# Load model
-@st.cache_resource
-def load_model():
-    model = tf.keras.models.load_model("trashclassify.keras")
-    return model
+# # Load model
+# @st.cache_resource
+# def load_model():
+#     model = tf.keras.models.load_model("trashclassify.keras")
+#     return model
 
-model = load_model()
+# model = load_model()
 
 # --- Camera input ---
 camera_photo = st.camera_input("Take a photo")
