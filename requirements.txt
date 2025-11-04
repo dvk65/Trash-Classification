@@ -3,4 +3,5 @@ streamlit
 tensorflow==2.14
 pillow
 numpy
-Keras
+keras
+pip==25.3
