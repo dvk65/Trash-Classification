@@ -1,8 +1,6 @@
-os
 streamlit
 tensorflow==2.14
 pillow
 numpy
 keras
-pip==25.3
 huggingface-hub
