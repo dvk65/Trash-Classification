@@ -1,34 +1,27 @@
 import streamlit as st
-# import tensorflow as tf
+import tensorflow as tf
 # from PIL import Image
 # import numpy as np
-# import os
-# import requests
+import os
 
 st.write("# Trash Classification App")
 	
-# tensorflow==2.14
+# 
 # pillow
 # numpy
 # keras
 # huggingface-hub
-# @st.cache_resource
-# def load_model():
-#     model_path = "trashclassify.keras"
-#     if not os.path.exists(model_path):
-#         url = "https://huggingface.co/dvk65/Trash-Classification-Model/resolve/main/trashclassify.keras"
-#         r = requests.get(url)
-#         with open(model_path, "wb") as f:
-#             f.write(r.content)
-#     return tf.keras.models.load_model(model_path)
+@st.cache_resource
+def load_model():
+    return tf.keras.models.load_model("trashclassify.keras")
 
-# model = load_model()
+model = load_model()
 
-# # --- Camera input ---
-# camera_photo = st.camera_input("Take a photo")
+# --- Camera input ---
+camera_photo = st.camera_input("Take a photo")
 
-# # --- File uploader ---
-# uploaded_photo = st.file_uploader("Or upload an image", type=["jpg", "jpeg", "png"])
+# --- File uploader ---
+uploaded_photo = st.file_uploader("Or upload an image", type=["jpg", "jpeg", "png"])
 
 # # --- Use whichever input is available ---
 # if camera_photo is not None:
