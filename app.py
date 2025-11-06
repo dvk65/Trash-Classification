@@ -1,12 +1,17 @@
 import streamlit as st
-import tensorflow as tf
-from PIL import Image
-import numpy as np
-import os
-import requests
+# import tensorflow as tf
+# from PIL import Image
+# import numpy as np
+# import os
+# import requests
 
 st.write("# Trash Classification App")
 	
+# tensorflow==2.14
+# pillow
+# numpy
+# keras
+# huggingface-hub
 # @st.cache_resource
 # def load_model():
 #     model_path = "trashclassify.keras"
