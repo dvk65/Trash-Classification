@@ -6,7 +6,9 @@ import os
 
 st.write("# Trash Classification App")
 	
-# 
+st.write("Current working directory:", os.getcwd())
+st.write("Files here:", os.listdir())
+
 # pillow
 # numpy
 # keras
