@@ -5,49 +5,50 @@ import numpy as np
 import os
 import requests
 
+st.write("# Trash Classification App")
 	
-@st.cache_resource
-def load_model():
-    model_path = "trashclassify.keras"
-    if not os.path.exists(model_path):
-        url = "https://huggingface.co/dvk65/Trash-Classification-Model/resolve/main/trashclassify.keras"
-        r = requests.get(url)
-        with open(model_path, "wb") as f:
-            f.write(r.content)
-    return tf.keras.models.load_model(model_path)
+# @st.cache_resource
+# def load_model():
+#     model_path = "trashclassify.keras"
+#     if not os.path.exists(model_path):
+#         url = "https://huggingface.co/dvk65/Trash-Classification-Model/resolve/main/trashclassify.keras"
+#         r = requests.get(url)
+#         with open(model_path, "wb") as f:
+#             f.write(r.content)
+#     return tf.keras.models.load_model(model_path)
 
-model = load_model()
+# model = load_model()
 
-# --- Camera input ---
-camera_photo = st.camera_input("Take a photo")
+# # --- Camera input ---
+# camera_photo = st.camera_input("Take a photo")
 
-# --- File uploader ---
-uploaded_photo = st.file_uploader("Or upload an image", type=["jpg", "jpeg", "png"])
+# # --- File uploader ---
+# uploaded_photo = st.file_uploader("Or upload an image", type=["jpg", "jpeg", "png"])
 
-# --- Use whichever input is available ---
-if camera_photo is not None:
-    uploaded_file = camera_photo
-elif uploaded_photo is not None:
-    uploaded_file = uploaded_photo
-else:
-    uploaded_file = None
+# # --- Use whichever input is available ---
+# if camera_photo is not None:
+#     uploaded_file = camera_photo
+# elif uploaded_photo is not None:
+#     uploaded_file = uploaded_photo
+# else:
+#     uploaded_file = None
 
-# --- Display image if available ---
-if uploaded_file:
-    image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Your Image", use_column_width=True)
+# # --- Display image if available ---
+# if uploaded_file:
+#     image = Image.open(uploaded_file).convert("RGB")
+#     st.image(image, caption="Your Image", use_column_width=True)
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+# if uploaded_file is not None:
+#     image = Image.open(uploaded_file).convert("RGB")
+#     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    # Preprocess
-    img = image.resize((224, 224))  # adjust to your model's input size
-    img_array = np.array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
+#     # Preprocess
+#     img = image.resize((224, 224))  # adjust to your model's input size
+#     img_array = np.array(img) / 255.0
+#     img_array = np.expand_dims(img_array, axis=0)
 
-    # Prediction
-    prediction = model.predict(img_array)
-    label = "Recycle" if prediction[0][0] > 0.5 else "General Trash"  # adjust based on your model’s output shape
+#     # Prediction
+#     prediction = model.predict(img_array)
+#     label = "Recycle" if prediction[0][0] > 0.5 else "General Trash"  # adjust based on your model’s output shape
 
-    st.markdown(f"### 🏷 Prediction: **{label}**")
+#     st.markdown(f"### 🏷 Prediction: **{label}**")
