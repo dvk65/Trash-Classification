@@ -1,6 +1,1 @@
 streamlit
-tensorflow==2.14
-pillow
-numpy
-keras
-huggingface-hub
