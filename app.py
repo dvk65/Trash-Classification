@@ -5,9 +5,6 @@ import numpy as np
 import os
 
 st.write("# Trash Classification App")
-	
-st.write("Current working directory:", os.getcwd())
-st.write("Files here:", os.listdir())
 
 @st.cache_resource
 def load_model():
@@ -45,6 +42,7 @@ if uploaded_file is not None:
 
     # Prediction
     prediction = model.predict(img_array)
+    st.write(prediction)
     label = "Recycle" if prediction[0][0] > 0.5 else "General Trash"  # adjust based on your model’s output shape
 
     st.markdown(f"### 🏷 Prediction: **{label}**")
