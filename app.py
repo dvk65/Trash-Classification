@@ -15,7 +15,7 @@ st.write("Files here:", os.listdir())
 # huggingface-hub
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("/trashclassify.keras")
+    return tf.keras.models.load_model("trashclassify.keras")
 
 model = load_model()
 
