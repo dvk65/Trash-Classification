@@ -30,8 +30,8 @@ The dataset is created by collecting decent images from Kaggle and roboflow data
 Each has around or over 1100 images</br>
 
 ### Step 2:
-Started with training a CNN + MobileNetV2 model but then realized that we have a lot of targets to deal with.</br>
-Resnet50 is better at training higher complexity tasks with limited dataset. Apparently it is good with distingushing backgrounds and objects (deeper networks) and pattern recognition becasue does not have the vanishing gardient problem (where the model forgets information as it proceeds along the network). Hence ResNet good.</br>
+Started with training a CNN + MobileNetV2 model but then realized that we have a lot of targets to deal with.</br></br>
+Resnet50 is better at training higher complexity tasks with limited dataset. Apparently it is good with distingushing backgrounds and objects (deeper networks) and pattern recognition becasue does not have the vanishing gardient problem (where the model forgets information as it proceeds along the network). Hence ResNet good.</br></br>
 Gave us validation (or testing) accuracy of 98% with the current trashclassify.keras file in this repo.</br>
 
 ### Step 3:
