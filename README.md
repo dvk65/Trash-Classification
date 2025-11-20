@@ -61,16 +61,17 @@ Steps to upload to GitHub using lfs:</br>
 4. git add .gitattributes (has all extensions that should be treated under lfs)
 5. git commit -m "message"
 6. git push origin main
-</br>
+
 If remote is not set:
-1. git remote -v
-2. If blank: git remote add origin https://github.com/your_username_after_cloning/Trash-Classification.git
-3. git remote -v (should show above path)
-4. git push origin main
-</br>
+1. `git remote -v`
+2. If blank: `git remote add origin https://github.com/your_username_after_cloning/Trash-Classification.git`
+3. `git remote -v` (should show above path as fetch and push)
+4. `git push origin main`
+
 If untracked large files already on commit tree:
-1. git clean -n (shows files)
-2. git clean -f -d (removes directories and files forecfully)
+1. `git clean -n` (shows files)
+2. `git clean -f -d` (removes directories and files forecfully)
+3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force`
 
 ### Step 4:
 app.py takes the saved model and uses it on the front-end.</br>
