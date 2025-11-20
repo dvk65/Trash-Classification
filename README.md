@@ -14,11 +14,11 @@ Structure is just:</br>
 trash_classification_using_ResNet.ipynb</br>
   |</br>
   Dataset (unzip dataset before uploading. code does not hande that currently. hpc so do not need to worry about it either mostly)</br>
-    |</br>
-    cups</br>
-    cans</br>
-    bottles</br>
-    cardboard</br>
+        |</br>
+        |- cups</br>
+        |- cans</br>
+        |- bottles</br>
+        |- cardboard</br>
 
 ### Step 1:
 Dataset currently has 4 directories:
