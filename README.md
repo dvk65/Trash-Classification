@@ -75,7 +75,8 @@ If untracked large files already on commit tree:
 
 ### Step 4:
 app.py takes the saved model and uses it on the front-end.</br>
-Chose Streamlit because it is meant to be used as front-ends for projects with models in the backend.
+Chose Streamlit because it is meant to be used as front-ends for projects with models in the backend.</br>
+https://rise-trash-classification.streamlit.app/
 
 ## Optional To-dos:
 1. Pipeline:</br>
