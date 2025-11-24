@@ -55,12 +55,13 @@ print(keras.__version__)
 They are compatible and do the zipping things too.</br>
 It took a few tries to upload it to GitHub. Also tried converting to tflite but some model layers were causing issues.</br>
 Steps to upload to GitHub using lfs:</br>
-1. brew install git-lfs (might have to download from here for windows: https://git-lfs.com/)
-2. git lfs install (check installation)
-3. git lfs track ".keras"
-4. git add .gitattributes (has all extensions that should be treated under lfs)
-5. git commit -m "message"
-6. git push origin main
+1. `brew install git-lfs` (might have to download from here for windows: https://git-lfs.com/)
+2. `git lfs install` (check installation)
+3. `git lfs track ".extension"`
+4. `git add .gitattributes` (has all extensions that should be treated under lfs)
+5. `git add large_file.extension`
+6. `git commit -m "message"`
+7. `git push origin main --force`
 
 If remote is not set:
 1. `git remote -v`
@@ -71,7 +72,7 @@ If remote is not set:
 If untracked large files already on commit tree:
 1. `git clean -n` (shows files)
 2. `git clean -f -d` (removes directories and files forecfully)
-3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force`
+3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force` (add origin again after using this command)
 
 ### Step 4:
 app.py takes the saved model and uses it on the front-end.</br>
