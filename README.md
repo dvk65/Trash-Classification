@@ -1,65 +1,75 @@
-# Trash-Classification
+# Trash-Classification using ResNet50
+This project develops a multi-class image classification model for identifying common waste items (cans, bottles, cups and cardboard so far) to support proper recycling and reduce contamination in waste streams. The repository includes the dataset uploaded using Git Large File Storage, model experimentation, training pipelines, and a Streamlit-based web interface that performs real-time classification using a fine-tuned ResNet50 model.
 
-Here is what has happened so far. It is probably going to sound messy so we can arrange a meeting and discuss properly. This is for me to remember and you to get more context.
-
-## Steps:
-1. Created Dataset
-2. Trained model
-3. Saved best accuracy model
-4. Created an app.py file for front-end
+## Overview
+This repository demonstrates:</br>
+1. Data collected from multiple public sources
+2. Preprocessing and augmentation for small/medium-sized vision datasets
+3. Model discussion (why CNN + MobileNetV2 to ResNet50)
+4. Training and evaluation on an HPC cluster
+5. Saving and exporting models in Streamlit-compatible format
+6. Deployment through a simple, reproducible app.py front-end
 
 ## Set-up:
-The notebook and dataset sit in a ood.explorer (northeastern hpc) directory.</br>
-Structure is just:</br>
-trash_classification_using_ResNet.ipynb</br>
-  |</br>
-  Dataset (unzip dataset before uploading. code does not hande that currently. hpc so do not need to worry about it either mostly)</br>
-        |</br>
-        |- cups</br>
-        |- cans</br>
-        |- bottles</br>
-        |- cardboard</br>
+I used our university provided HPC cluster for training the notebook due to python library versions and higher processing resources.</br>
+Project Structure:</br>
+```
+Trash-Classification/
+│
+├── trash_classification_using_ResNet.ipynb   # Model training notebook
+├── trashclassify.keras                       # Saved model (Keras ZIP format)
+└── Dataset/                                  # Unzip dataset before re-creating this Structure on HPC
+       ├── bottles/
+       ├── cans/
+       ├── cardboard/
+       └── cups/
+```
 
-### Step 1:
-Dataset currently has 4 directories:
+### Dataset Creation:
+The dataset consists of four waste categories:
 1. cups
 2. bottles
 3. cardboard
 4. cans
-The dataset is created by collecting decent images from Kaggle and roboflow datasets.</br>
-Each has around or over 1100 images</br>
+Images were collected from Kaggle and Roboflow public datasets and curated for balanced representation.</br>
+Each class contains ~1100+ images, ensuring sufficient coverage for small-scale deep learning experiments.</br>
+Future extensions will add categories such as compostable materials. To help us grow the dataset refer the jpeg files in the repo.
 
-### Step 2:
-Started with training a CNN + MobileNetV2 model but then realized that we have a lot of targets to deal with.</br></br>
-Resnet50 is better at training higher complexity tasks with limited dataset. Apparently it is good with distingushing backgrounds and objects (deeper networks) and pattern recognition becasue does not have the vanishing gardient problem (where the model forgets information as it proceeds along the network). Hence ResNet good.</br></br>
-Gave us validation (or testing) accuracy of 98% with the current trashclassify.keras file in this repo.</br>
-
-### Step 3:
-It needed some work to upload the trashclassify.keras file downloaded from hpc to GitHub.</br>
-This was necessary because Streamlit has a very convenient way to update using GitHub and it needs the model file and app.py to run. The model file has to be a zipped keras. Here is how to check that:
+### Model Selection and Training:
+Initial experiments used a custom CNN + MobileNetV2 (TensorFlow Lite–friendly)</br>
+These architectures performed well, but with four visually similar classes and complex backgrounds, the models plateaued.</br>
+ResNet50 was ultimately selected because:
+- Deep residual networks mitigate the vanishing gradient problem
+- They capture fine-grained features and background context
+- They perform strongly on limited datasets after transfer learning
+- They generalize better than lightweight CNNs for multi-class tasks
+After fine-tuning, the final model achieved **98% validation accuracy**.</br>
+The model is saved as a .keras ZIP-format file compatible with modern TensorFlow/Streamlit deployments which can be checked using:
 ```
 file trashclassify.keras
 ```
+from the same directory where the .keras file is saved.</br>
 And the output should be:
 ```
 trashclassify.keras: Zip archive data, at least v2.0 to extract, compression method=store
 ```
-Surprisingly older versions of keras store it in a .h5 format which streamlit does not accept.
-So we need keras and tensorflow versions to be:
+Older versions of keras store it in a .h5 format which streamlit does not accept.</br>
+So the required keras and tensorflow versions are:
 ```
 print(tf.__version__)
 print(keras.__version__)
 2.16.1
 3.3.3
 ```
-They are compatible and do the zipping things too.</br>
-It took a few tries to upload it to GitHub. Also tried converting to tflite but some model layers were causing issues.</br>
+### Managing Large Model Files (Git LFS):
+Streamlit deployments require the actual model file to be stored in the repository.</br>
+Because the file exceeds GitHub's standard size limit since it was trained on a HPC, Git LFS (Large File Storage) was used.
 Steps to upload to GitHub using lfs:</br>
-1. `brew install git-lfs` (might have to download from here for windows: https://git-lfs.com/)
+1. `brew install git-lfs` (might have to download for windows: https://git-lfs.com/)
 2. `git lfs install` (check installation)
-3. `git lfs track ".extension"`
-4. `git add .gitattributes` (has all extensions that should be treated under lfs)
-5. `git add large_file.extension`
+3. `git lfs track ".keras"`
+4. `git add .gitattributes` (gitattributes has all extensions that should be treated under lfs)
+5. `git add trashclassify.keras`
 6. `git commit -m "message"`
 7. `git push origin main --force`
 
@@ -69,22 +79,24 @@ If remote is not set:
 3. `git remote -v` (should show above path as fetch and push)
 4. `git push origin main`
 
-If untracked large files already on commit tree:
+If large files are already committed, repository cleanup can be performed using:
 1. `git clean -n` (shows files)
 2. `git clean -f -d` (removes directories and files forecfully)
 3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force` (add origin again after using this command)
 
-### Step 4:
-app.py takes the saved model and uses it on the front-end.</br>
-Chose Streamlit because it is meant to be used as front-ends for projects with models in the backend.</br>
-https://rise-trash-classification.streamlit.app/
+### Streamlit App Deployment:
+The Streamlit interface (app.py) loads the trained model and provides:
+- Camera or file-upload input
+- Real-time preprocessing (resizing, normalization)
+- Model inference and probability scores
+- User-friendly output for recycling decisions
+Live Demo: https://rise-trash-classification.streamlit.app/
 
-## Optional To-dos:
-1. Pipeline:</br>
-Think of a pipeline to combine the notebook, dataset and GitHub repo code.</br>
-Something to make it more easily reproducible.
-2. Dataset:</br>
-Add more directories with over 1100 images.</br>
-See recycle.jpeg and compost.jpeg to add more directories.
-3. Should we add a part to the front-end to keep updating the dataset? Add targets as options to choose from (like wrappers, cups, bottles, etc). When people click on it, they can click pictures of that object and upload it to that directory.</br>
-But I don't know how careful people will be about that.
+## Future Work:
+1. Reproducible Pipeline:</br>
+- Automate dataset download, preprocessing, training, and model saving
+- Create workflow to run model and update front-end with a single click or script
+2. Dataset Expansion:</br>
+- Add more categories (banana peels, apple stems, wrappers)
+- Increase dataset size and diversity
+- Introduce synthetic augmentation pipelines
