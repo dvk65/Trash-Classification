@@ -43,7 +43,7 @@ if uploaded_file is not None:
     # Prediction
     prediction = model.predict(img_array)
     pred_index = np.argmax(prediction[0]) # get prediction index of highest probablity
-    class_names = ["bottles", "cans", "cardboard", "cups", "apples", "bananas", "peels", "eggshells", "generalcompost", "mixers"]
+    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels"]
     label = class_names[pred_index]
     
     st.write("Predicted Label: ", label)
