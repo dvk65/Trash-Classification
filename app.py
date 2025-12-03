@@ -8,7 +8,7 @@ st.write("# Trash Classification App")
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("trashclassify.keras")
+    return tf.keras.models.load_model("trashclassify_full.keras")
 
 model = load_model()
 
@@ -43,7 +43,7 @@ if uploaded_file is not None:
     # Prediction
     prediction = model.predict(img_array)
     pred_index = np.argmax(prediction[0]) # get prediction index of highest probablity
-    class_names = ["bottles", "cans", "cardboard", "cups"]
+    class_names = ["bottles", "cans", "cardboard", "cups", "apples", "bananas", "peels", "eggshells", "generalcompost", "mixers"]
     label = class_names[pred_index]
     
     st.write("Predicted Label: ", label)
