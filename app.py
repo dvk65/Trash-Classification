@@ -43,10 +43,10 @@ if uploaded_file is not None:
     # Prediction
     prediction = model.predict(img_array)
     pred_index = np.argmax(prediction[0]) # get prediction index of highest probablity
-    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels"]
+    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels", "tissues"]
     label = class_names[pred_index]
 
-    if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers":
+    if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers" or label == "tissues":
         label_can = "Compost"
     elif label == "bottles" or label == "cans" or label == "cups" or label == "cardboard":
         label_can = "Recycling"
