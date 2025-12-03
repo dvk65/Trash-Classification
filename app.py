@@ -29,11 +29,11 @@ else:
 # --- Display image if available ---
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Your Image", use_column_width=True)
+    st.image(image, caption="Uploaded Image", use_column_width=True)
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    # st.image(image, caption="Uploaded Image", use_column_width=True)
 
     # Preprocess
     img = image.resize((224, 224)) 
@@ -45,8 +45,15 @@ if uploaded_file is not None:
     pred_index = np.argmax(prediction[0]) # get prediction index of highest probablity
     class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels"]
     label = class_names[pred_index]
-    
-    st.write("Predicted Label: ", label)
-    st.write("Prediction Probabilities: ", prediction)
 
-    st.markdown(f"### 🏷 Prediction: **{label}**")
+    if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers":
+        label_can = "Compost"
+    elif label == "bottles" or label == "cans" or label == "cups" or label == "cardboard":
+        label_can = "Recycling"
+    else:
+        label_can = "General Trash"
+    
+    st.write("Predicted item: ", label)
+    # st.write("Prediction Probabilities: ", prediction)
+
+    st.markdown(f"### Use the **{label_can}** bin for disposal.")
