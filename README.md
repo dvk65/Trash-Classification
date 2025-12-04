@@ -1,5 +1,5 @@
 # Trash-Classification using ResNet50
-This project develops a multi-class image classification model for identifying common waste items (cans, bottles, cups and cardboard so far) to support proper recycling and reduce contamination in waste streams. The repository includes the dataset uploaded using Git Large File Storage, model experimentation, training pipelines, and a Streamlit-based web interface that performs real-time classification using a fine-tuned ResNet50 model.
+This project develops a multi-class image classification model for identifying common waste items to support proper recycling and reduce contamination in waste streams. The repository includes the dataset uploaded using Git Large File Storage, model experimentation, training pipelines, and a Streamlit-based web interface that performs real-time classification using a fine-tuned ResNet50 model.
 
 ## Overview
 This repository demonstrates:</br>
@@ -22,21 +22,22 @@ Trash-Classification/
        ├── bottles/
        ├── cans/
        ├── cardboard/
-       └── cups/
+       ├── cups/
+       ...
 ```
 
 ### Dataset Creation:
 The dataset consists of four waste categories:
-1. cups
-2. bottles
-3. cardboard
-4. cans
+1. recycle
+2. compost
+3. general trash
+4. commingled (bottles and cans)
 Images were collected from Kaggle and Roboflow public datasets and curated for balanced representation.</br>
 Each class contains ~1100+ images, ensuring sufficient coverage for small-scale deep learning experiments.</br>
 Future extensions will add categories such as compostable materials. To help us grow the dataset refer the jpeg files in the repo.
 
 ### Model Selection and Training:
-Initial experiments used a custom CNN + MobileNetV2 (TensorFlow Lite–friendly)</br>
+Initial experiments used a custom CNN + MobileNetV2 (TensorFlow Lite–friendly) model.</br>
 These architectures performed well, but with four visually similar classes and complex backgrounds, the models plateaued.</br>
 ResNet50 was ultimately selected because:
 - Deep residual networks mitigate the vanishing gradient problem
@@ -97,6 +98,6 @@ Live Demo: https://rise-trash-classification.streamlit.app/
 - Automate dataset download, preprocessing, training, and model saving
 - Create workflow to run model and update front-end with a single click or script
 2. Dataset Expansion:</br>
-- Add more categories (banana peels, apple stems, wrappers)
+- Add more waste directories
 - Increase dataset size and diversity
 - Introduce synthetic augmentation pipelines
