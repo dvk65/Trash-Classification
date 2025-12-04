@@ -26,7 +26,7 @@ st.write("# Trash Classification App")
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("trashclassify_good.keras")
+    return tf.keras.models.load_model("trashclassify.keras")
 
 model = load_model()
 
