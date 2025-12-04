@@ -63,9 +63,9 @@ print(keras.__version__)
 3.3.3
 ```
 ### Managing Large Model Files (Git LFS):
-Streamlit deployments require the actual model file to be stored in the repository.</br>
-Because the file exceeds GitHub's standard size limit since it was trained on a HPC, Git LFS (Large File Storage) was used.
-Steps to upload to GitHub using lfs:</br>
+Streamlit deployments require the model file to be available through app.py.</br>
+Because the file exceeds GitHub's standard size limit since it was trained on a HPC, Git LFS (Large File Storage) was used to upload it to Hugging Face at: https://huggingface.co/dvk65/trash-classifier-resnet50.</br>
+Steps to upload to Hugging Face using lfs:</br>
 1. `brew install git-lfs` (might have to download for windows: https://git-lfs.com/)
 2. `git lfs install` (check installation)
 3. `git lfs track ".keras"`
@@ -73,12 +73,6 @@ Steps to upload to GitHub using lfs:</br>
 5. `git add trashclassify.keras`
 6. `git commit -m "message"`
 7. `git push origin main --force`
-
-If remote is not set:
-1. `git remote -v`
-2. If blank: `git remote add origin https://github.com/your_username_after_cloning/Trash-Classification.git`
-3. `git remote -v` (should show above path as fetch and push)
-4. `git push origin main`
 
 If large files are already committed, repository cleanup can be performed using:
 1. `git clean -n` (shows files)
