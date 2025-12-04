@@ -80,6 +80,9 @@ If large files are already committed, repository cleanup can be performed using:
 3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force` (add origin again after using this command)
 
 ### Streamlit App Deployment:
+Streamlit makes deploying public apps from GitHub fairly easy. To do this, connect your GitHub account to Streamlit (or login to Streamlit with GitHub credentials).</br>
+Then go to "Create App" and choose to deploy a public app from GitHub. Select the repo that has your app.py and requirements.txt.</br>
+One thing to remember when creating the requirements.txt is to specify the tensorflow version of 2.20.0 since it supports importing models from Hugging Face.</br>
 The Streamlit interface (app.py) loads the trained model and provides:
 - Camera or file-upload input
 - Real-time preprocessing (resizing, normalization)
