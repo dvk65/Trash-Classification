@@ -48,8 +48,10 @@ if uploaded_file is not None:
 
     if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers" or label == "tissues":
         label_can = "Compost"
-    elif label == "bottles" or label == "cans" or label == "cups" or label == "cardboard":
-        label_can = "Recycling"
+    elif label == "bottles" or label == "cans":
+        label_can = "Commingled"
+    elif label == "cups" or label == "cardboard":
+        label_can = "Recycle"
     else:
         label_can = "General Trash"
     
@@ -57,3 +59,17 @@ if uploaded_file is not None:
     # st.write("Prediction Probabilities: ", prediction)
 
     st.markdown(f"### Use the **{label_can}** bin for disposal.")
+    if label_can == "Compost":
+        st.image("compostable.png", width=200)
+    elif label_can == "Recycling":
+        st.image("recycle.png", width=200)
+    elif label_can == "Commingled":
+        st.image("commingled.png", width=200)
+    else:
+        st.image("trashbin.png", width=200)
+
+    # Icon attribution:
+    # <a href="https://www.flaticon.com/free-icons/trash" title="trash icons">Trash icons created by Those Icons - Flaticon</a>
+    # <a href="https://www.flaticon.com/free-icons/reusable-bottle" title="reusable bottle icons">Reusable bottle icons created by HAJICON - Flaticon</a>
+    # <a href="https://www.flaticon.com/free-icons/compost" title="compost icons">Compost icons created by Freepik - Flaticon</a>
+    # <a href="https://www.flaticon.com/free-icons/recycle-bin" title="recycle bin icons">Recycle bin icons created by ifans28 - Flaticon</a>
