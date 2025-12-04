@@ -61,7 +61,7 @@ if uploaded_file is not None:
     st.markdown(f"### Use the **{label_can}** bin for disposal.")
     if label_can == "Compost":
         st.image("compostable.png", width=200)
-    elif label_can == "Recycling":
+    elif label_can == "Recycle":
         st.image("recycle.png", width=200)
     elif label_can == "Commingled":
         st.image("comingled.png", width=200)
