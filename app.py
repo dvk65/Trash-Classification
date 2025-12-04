@@ -64,7 +64,7 @@ if uploaded_file is not None:
     elif label_can == "Recycling":
         st.image("recycle.png", width=200)
     elif label_can == "Commingled":
-        st.image("commingled.png", width=200)
+        st.image("comingled.png", width=200)
     else:
         st.image("trashbin.png", width=200)
 
