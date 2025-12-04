@@ -9,7 +9,7 @@ st.write("# Trash Classification App")
 
 model_path = hf_hub_download(
     repo_id="dvk65/trash-classifier-resnet50",
-    filename="trashclassify.h5"
+    filename="trashclassify.keras"
 )
 
 model = tf.keras.models.load_model(model_path, compile=False)
