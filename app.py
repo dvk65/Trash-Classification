@@ -3,32 +3,22 @@ import tensorflow as tf
 from PIL import Image
 import numpy as np
 import os
-# from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download
 
 st.write("# Trash Classification App")
 
-# REPO_ID = "dvk65/trash-classifier-resnet50"
-# FILENAME = "trashclassify.keras"
+model_path = hf_hub_download(
+    repo_id="dvk65/trash-classifier-resnet50",
+    filename="trashclassify.h5"
+)
+
+model = tf.keras.models.load_model(model_path, compile=False)
 
 # @st.cache_resource
 # def load_model():
-#     # If repo is public, you don't need a token
-#     model_path = hf_hub_download(
-#         repo_id=REPO_ID,
-#         filename=FILENAME,
-#         # token=st.secrets["HF_TOKEN"]  # only if private
-#     )
-#     model = tf.keras.models.load_model(model_path)
-#     return model
+#     return tf.keras.models.load_model("trashclassify.keras")
 
 # model = load_model()
-# print("Model loaded from:", local_model_path)
-
-@st.cache_resource
-def load_model():
-    return tf.keras.models.load_model("trashclassify.keras")
-
-model = load_model()
 
 # --- Camera input ---
 camera_photo = st.camera_input("Take a photo")
