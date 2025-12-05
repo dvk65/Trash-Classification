@@ -50,8 +50,8 @@ if uploaded_file is not None:
 
     # Prediction
     prediction = model.predict(img_array)
-    pred_index = np.max(prediction[0]) # get prediction index of highest probablity
-    threshold_index = np.argmax(prediction[0]) # get index of highest probability
+    pred_index = np.argmax(prediction[0]) # get prediction index of highest probablity
+    threshold_index = prediction[0][pred_index]
 
     threshold = 0.8
 
