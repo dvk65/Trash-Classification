@@ -57,6 +57,8 @@ if uploaded_file is not None:
 
     class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels", "tissues"]
 
+    st.write("Prediction Probabilities: ", threshold_index)
+
     if threshold_index < threshold:
         label = "uncertain"
         label_can = "General Trash"
@@ -73,7 +75,7 @@ if uploaded_file is not None:
             label_can = "General Trash"
     
     st.write("Predicted item: ", label)
-    # st.write("Prediction Probabilities: ", prediction)
+    # st.write("Prediction Probabilities: ", threshold_index)
 
     st.markdown(f"### Use the **{label_can}** bin for disposal.")
     if label_can == "Compost":
