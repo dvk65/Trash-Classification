@@ -63,7 +63,7 @@ if uploaded_file is not None:
         label = "uncertain"
         label_can = "General Trash"
     else:
-        label = class_names[threshold_index]
+        label = class_names[pred_index]
 
         if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers" or label == "tissues":
             label_can = "Compost"
