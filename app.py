@@ -50,18 +50,27 @@ if uploaded_file is not None:
 
     # Prediction
     prediction = model.predict(img_array)
-    pred_index = np.argmax(prediction[0]) # get prediction index of highest probablity
-    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels", "tissues"]
-    label = class_names[pred_index]
+    pred_index = np.max(prediction[0]) # get prediction index of highest probablity
+    threshold_index = np.argmax(prediction[0]) # get index of highest probability
 
-    if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers" or label == "tissues":
-        label_can = "Compost"
-    elif label == "bottles" or label == "cans":
-        label_can = "Commingled"
-    elif label == "cups" or label == "cardboard":
-        label_can = "Recycle"
-    else:
+    threshold = 0.8
+
+    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels", "tissues"]
+
+    if threshold_index < threshold:
+        label = "uncertain"
         label_can = "General Trash"
+    else:
+        label = class_names[pred_index]
+
+        if label == "generalcompost" or label == "peels" or label == "eggshells" or label == "apples" or label == "bananas" or label == "mixers" or label == "tissues":
+            label_can = "Compost"
+        elif label == "bottles" or label == "cans":
+            label_can = "Commingled"
+        elif label == "cups" or label == "cardboard":
+            label_can = "Recycle"
+        else:
+            label_can = "General Trash"
     
     st.write("Predicted item: ", label)
     # st.write("Prediction Probabilities: ", prediction)
