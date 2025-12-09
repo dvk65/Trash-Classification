@@ -9,7 +9,7 @@ st.write("# Trash Classification App")
 
 model_path = hf_hub_download(
     repo_id="dvk65/trash-classifier-resnet50",
-    filename="trashclassify.keras"
+    filename="trashclassify_13.keras"
 )
 
 model = tf.keras.models.load_model(model_path, compile=False)
@@ -55,7 +55,7 @@ if uploaded_file is not None:
 
     threshold = 0.8
 
-    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels", "tissues"]
+    class_names = ["apples", "bananas", "bottles", "cans", "cardboard", "cups", "eggshells", "generalcompost", "mixers", "peels", "plasticbags", "plastics", "tissues"]
 
     if threshold_index < threshold:
         label = "uncertain"
@@ -69,6 +69,8 @@ if uploaded_file is not None:
             label_can = "Commingled"
         elif label == "cups" or label == "cardboard":
             label_can = "Recycle"
+        elif label == "plasticbags" or label == "plastics":
+            label_can = "General Trash"
         else:
             label_can = "General Trash"
     
