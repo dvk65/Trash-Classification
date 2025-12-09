@@ -4,6 +4,8 @@ from PIL import Image
 import numpy as np
 import os
 from huggingface_hub import hf_hub_download
+from tensorflow import keras
+from tensorflow.keras.applications.resnet50 import preprocess_input
 
 st.write("# Trash Classification App")
 
@@ -12,7 +14,7 @@ model_path = hf_hub_download(
     filename="trashclassify_13.keras"
 )
 
-model = tf.keras.models.load_model(model_path, compile=False)
+model = tf.keras.models.load_model(model_path, compile=False, custom_objects={"preprocess_input": preprocess_input})
 
 # @st.cache_resource
 # def load_model():
