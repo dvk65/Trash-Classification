@@ -77,7 +77,11 @@ Steps to upload to Hugging Face using lfs:</br>
 If large files are already committed, repository cleanup can be performed using:
 1. `git clean -n` (shows files)
 2. `git clean -f -d` (removes directories and files forecfully)
-3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force` (add origin again after using this command)
+3. Or,`git filter-repo --strip-blobs-bigger-than 10M --force`
+   Add origin again after using this command with:
+   `git remote add origin https://github.com/username/repos-git-url.git`
+   Check with:
+   `git remote -v`
 
 ### Streamlit App Deployment:
 Streamlit makes deploying public apps from GitHub fairly easy. To do this, connect your GitHub account to Streamlit (or login to Streamlit with GitHub credentials).</br>
