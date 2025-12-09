@@ -3,7 +3,7 @@ This project develops a multi-class image classification model for identifying c
 
 ## Overview
 This repository demonstrates:</br>
-1. Data collected from multiple public sources
+1. Data collected from multiple public sources (Can be accessed at https://huggingface.co/datasets/dvk65/TrashTypes)
 2. Preprocessing and augmentation for small/medium-sized vision datasets
 3. Model discussion (why CNN + MobileNetV2 to ResNet50)
 4. Training and evaluation on an HPC cluster
