@@ -62,7 +62,7 @@ print(keras.__version__)
 2.16.1
 3.3.3
 ```
-After training, the best performing model is stored at https://huggingface.co/dvk65/trash-classifier-resnet50, named trashclassifier_13.keras and called using their model hub API. So a local download or storing of the file is not required. Visit the repo to contribute to the model architecture or to understand how to use it in your project.
+After training, the best performing model is stored at https://huggingface.co/dvk65/trash-classifier-resnet50, named trashclassifier_13.keras and called using their model hub API. So a local download or storing of the file is not required.</br> Visit the repo to contribute to the model architecture or to understand how to use it in your project.
 ### Managing Large Model Files (Git LFS):
 Streamlit deployments require the model file to be available through app.py.</br>
 Because the file exceeds GitHub's standard size limit since it was trained on a HPC, Git LFS (Large File Storage) was used to upload it to Hugging Face at: https://huggingface.co/dvk65/trash-classifier-resnet50.</br>
