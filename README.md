@@ -1,5 +1,5 @@
 # Trash-Classification using ResNet50
-This project develops a multi-class image classification model for identifying common waste items to support proper recycling and reduce contamination in waste streams. The repository includes the dataset uploaded using Git Large File Storage, model experimentation, training pipelines, and a Streamlit-based web interface that performs real-time classification using a fine-tuned ResNet50 model.
+This project develops a multi-class image classification model for identifying common waste items with the correct bins to dispose them and reduce contamination in waste streams. The repository includes notebook used to train the model, files (app.py and requirements.txt) to support the Streamlit-based web interface that performs real-time classification.
 
 ## Overview
 This repository demonstrates:</br>
@@ -34,7 +34,7 @@ The dataset consists of four waste categories:
 4. commingled (bottles and cans)
 Images were collected from Kaggle and Roboflow public datasets and curated for balanced representation.</br>
 Each class contains ~1100+ images, ensuring sufficient coverage for small-scale deep learning experiments.</br>
-Future extensions will add categories such as compostable materials. To help us grow the dataset refer the jpeg files in the repo.
+Future extensions will add categories such as compostable materials. To help us grow the dataset refer the jpeg files in the repo and https://huggingface.co/datasets/dvk65/TrashTypes.
 
 ### Model Selection and Training:
 Initial experiments used a custom CNN + MobileNetV2 (TensorFlow Lite–friendly) model.</br>
@@ -44,12 +44,12 @@ ResNet50 was ultimately selected because:
 - They capture fine-grained features and background context
 - They perform strongly on limited datasets after transfer learning
 - They generalize better than lightweight CNNs for multi-class tasks
-After fine-tuning, the final model achieved **98% validation accuracy**.</br>
-The model is saved as a .keras ZIP-format file compatible with modern TensorFlow/Streamlit deployments which can be checked using:
+After fine-tuning, the final model achieved **98.29% validation accuracy**.</br>
+The model should be saved as a .keras ZIP-format file compatible with modern TensorFlow/Streamlit deployments which can be checked using:
 ```
 file trashclassify.keras
 ```
-from the same directory where the .keras file is saved.</br>
+after cding to the same directory where the .keras file is saved.</br>
 And the output should be:
 ```
 trashclassify.keras: Zip archive data, at least v2.0 to extract, compression method=store
@@ -62,6 +62,7 @@ print(keras.__version__)
 2.16.1
 3.3.3
 ```
+After training, the best performing model is stored at https://huggingface.co/dvk65/trash-classifier-resnet50, named trashclassifier_13.keras and called using their model hub API. So a local download or storing of the file is not required. Visit the repo to contribute to the model architecture or to understand how to use it in your project.
 ### Managing Large Model Files (Git LFS):
 Streamlit deployments require the model file to be available through app.py.</br>
 Because the file exceeds GitHub's standard size limit since it was trained on a HPC, Git LFS (Large File Storage) was used to upload it to Hugging Face at: https://huggingface.co/dvk65/trash-classifier-resnet50.</br>
